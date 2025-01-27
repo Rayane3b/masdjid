@@ -3,71 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مسجدنا الكريم</title>
+    <title>مسجد أبو بكر الصديق</title>
     <link rel="stylesheet" href="masdjid.css">
     <link rel="icon" href="../صور/nabawi-mosque.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header class="header">
-        <div class="hea">
-            <!-- العنوان وأيقونة المسجد -->
-            <div class="mosque-title">
-                <i class="fa-solid fa-mosque"></i>
-                <h2>مسجد أبو بكر الصديق</h2>
-            </div>
-            
-            <!-- حاوية زر القائمة -->
-            <div class="menu-container">
-                <div class="menu-icon">
-                    <i class="fas fa-bars"></i>
-                </div>
+        <div class="header-top">
+            <div class="prayer-alert" id="prayer-alert">
+                <i class="fas fa-bell"></i>
+                <span id="prayer-notification">جاري تحميل مواقيت الصلاة...</span>
             </div>
         </div>
         
-        <!-- القائمة المنسدلة -->
-        <nav class="links">
-            <a href="#" class="link">الرئيسية</a>
-            <a href="../دروس/doross.html" class="link">دروس</a>
-            <a href="#" class="link">فتاوى</a>
-            <a href="../مكتبة/maktaba.html" class="link">مكتبة</a>
-            <a href="#" class="link">حلقات</a>
-        </nav>
+        <div class="header-main">
+            <div class="mosque-title">
+                <i class="fas fa-mosque"></i>
+                <h1>مسجد أبو بكر الصديق</h1>
+                <div class="subtitle" id="plato">بلاطو - عين طاية</div>
+            </div>
+            
+            <div class="menu-container">
+                <button class="menu-icon">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav class="nav-links">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>الرئيسية</span>
+                </a>
+                <a href="../دروس/doross.html" class="nav-link">
+                    <i class="fas fa-book-open"></i>
+                    <span>دروس</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-scroll"></i>
+                    <span>فتاوى</span>
+                </a>
+                <a href="../مكتبة/maktaba.html" class="nav-link">
+                    <i class="fas fa-books"></i>
+                    <span>مكتبة</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    <span>حلقات</span>
+                </a>
+            </nav>
+        </div>
     </header>
 
-    <section class="prayer-times">
-        <h2>مواقيت الصلاة اليوم</h2>
-        <div class="current-datetime" id="current-datetime"></div>
-        <h1>الوقت المتبقي حتى الصلاة التالية</h1>
-        <div id="countdown">--:--:--</div>
-        <div class="prayer-grid" id="prayer-grid">
-            <!-- سيتم ملء مواقيت الصلاة ديناميكياً -->
+    <section class="hero">
+        <div class="prayer-times-card">
+            <div class="current-datetime" id="current-datetime"></div>
+            <h2 class="section-title">مواقيت الصلاة</h2>
+            <div class="countdown-container">
+                <div class="next-prayer" id="next-prayer">الصلاة القادمة</div>
+                <div id="countdown" class="countdown">--:--:--</div>
+            </div>
+            <div class="prayer-grid" id="prayer-grid"></div>
         </div>
     </section>
+
     <main class="main-content">
-        <div class="section">
-            <h2>عن المسجد gfagzh</h2>
-            <p>'مسجد أبو بكر الصديق ,بلاطو,عين-طاية' </p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-info-circle"></i>
+                <h2>عن المسجد</h2>
+                <p>مسجد أبو بكر الصديق، يقع في منطقة بلاطو بعين طاية. مركز إشعاع روحي وعلمي للمجتمع المحلي.</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-calendar-alt"></i>
+                <h2>الأنشطة والبرامج</h2>
+                <p>تحفيظ القرآن للصغار والكبار، دروس دينية منتظمة، محاضرات أسبوعية مع فضيلة الشيخ مقداد م.</p>
+                <div class="upcoming-events">
+                    <h3>الأحداث القادمة</h3>
+                    <ul id="events-list">
+                        <!-- سيتم تعبئتها بواسطة JavaScript -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-hands-helping"></i>
+                <h2>خدمات المسجد</h2>
+                <ul class="services-list">
+                    <li><i class="fas fa-water"></i> مرافق وضوء حديثة</li>
+                    <li><i class="fas fa-female"></i> مصلى للنساء</li>
+                    <li><i class="fas fa-book"></i> مكتبة إسلامية</li>
+                    <li><i class="fas fa-parking"></i> موقف سيارات</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="section">
-            <h2>الأنشطة والبرامج</h2>
-            <p> تقام فيه الصلوات ويتم تحفيظ القرأن سواءا للصغار أو الكبار مع وجود حلقات يقدمها فضيلة الشيخ محمد مقداد.</p>
-        </div>
-
-        <div class="section">
-            <h2>خدمات المسجد</h2>
-            <p> بيت للوضوء، مصلى للنساء، ومكتبة إسلامية.</p>
+        <div class="announcements">
+            <h2>آخر الإعلانات</h2>
+            <div class="announcement-slider" id="announcement-slider">
+                <!-- سيتم تعبئتها بواسطة JavaScript -->
+            </div>
         </div>
     </main>
 
     <footer class="footer">
-        <h2>تواصل معنا</h2>
-        <div class="contact-info">
-            <p>الهاتف: 0795569675</p>
-            <p>البريد الإلكتروني: rayanebenfattoum21@gmail.com</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> 0795569675</p>
+                    <p><i class="fas fa-envelope"></i> rayanebenfattoum21@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> بلاطو، عين طاية</p>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul class="quick-links">
+                    <li><a href="#">جدول الدروس</a></li>
+                    <li><a href="#">التسجيل في حلقات التحفيظ</a></li>
+                    <li><a href="#">المكتبة الإلكترونية</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>ساعات العمل</h3>
+                <p>المسجد مفتوح على مدار الساعة</p>
+                <p>المكتبة: 9:00 صباحاً - 9:00 مساءً</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>جميع الحقوق محفوظة © 2024 مسجد أبو بكر الصديق</p>
         </div>
     </footer>
+
     <script src="masdjid.js"></script>
 </body>
 </html>

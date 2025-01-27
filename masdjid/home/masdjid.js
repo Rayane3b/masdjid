@@ -1,148 +1,255 @@
-// تعريف كائن الصلوات باللغة العربية
-const prayers = {
-    Fajr: "الفجر",
-    Dhuhr: "الظهر",
-    Asr: "العصر",
-    Maghrib: "المغرب",
-    Isha: "العشاء"
+// Constants and Configuration
+const CONFIG = {
+    PRAYER_UPDATE_INTERVAL: 1000 * 60, // 1 minute
+    ANNOUNCEMENT_INTERVAL: 5000, // 5 seconds
+    API_ENDPOINT: 'https://api.aladhan.com/v1/timings',
+    PRAYER_NAMES: {
+        Fajr: "الفجر",
+        Dhuhr: "الظهر",
+        Asr: "العصر",
+        Maghrib: "المغرب",
+        Isha: "العشاء"
+    }
 };
 
-// تحديث التاريخ والوقت
-function updateDateTime() {
-    const now = new Date();
-    const options = {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
+// Utility Functions
+const formatTime = (date) => {
+    return new Intl.DateTimeFormat('ar-DZ', {
+        hour: '2-digit',
+        minute: '2-digit',
         hour12: false
-    };
-    document.getElementById("current-datetime").textContent = new Intl.DateTimeFormat("ar-DZ", options).format(now);
-}
+    }).format(date);
+};
 
-// الحصول على إحداثيات الموقع الجغرافي
-function getLocationAndFetchPrayerTimes() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-            fetchPrayerTimes(latitude, longitude);
-        }, error => {
-            console.error("خطأ في تحديد الموقع:", error);
-            document.getElementById("countdown").textContent = "خطأ في تحديد الموقع.";
-        });
-    } else {
-        console.error("المتصفح لا يدعم تحديد الموقع الجغرافي.");
-        document.getElementById("countdown").textContent = "المتصفح لا يدعم تحديد الموقع.";
+const formatDate = (date) => {
+    return new Intl.DateTimeFormat('ar-DZ', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    }).format(date);
+};
+
+// Prayer Times Management
+class PrayerTimesManager {
+    constructor() {
+        this.prayerTimes = null;
+        this.nextPrayer = null;
     }
-}
 
-// جلب مواقيت الصلاة باستخدام الإحداثيات
-async function fetchPrayerTimes(latitude, longitude) {
-    try {
-        const response = await fetch(`https://api.aladhan.com/v1/timings?latitude=${latitude}&longitude=${longitude}&method=3`);
-        const data = await response.json();
-
-        if (!data || !data.data || !data.data.timings) {
-            throw new Error("لا توجد بيانات مواقيت صلاة.");
+    async initialize() {
+        try {
+            await this.getCurrentLocation();
+            await this.fetchPrayerTimes();
+            this.startPeriodicUpdate();
+            this.updateUI();
+        } catch (error) {
+            console.error('Error initializing prayer times:', error);
+            this.handleError(error);
         }
-
-        const timings = data.data.timings;
-
-        // تحديث شبكة مواقيت الصلاة
-        updatePrayerGrid(timings);
-
-        // البدء بحساب العد التنازلي للصلاة التالية
-        startCountdown(timings);
-    } catch (error) {
-        console.error("خطأ في جلب مواقيت الصلاة:", error);
-        document.getElementById("countdown").textContent = "خطأ في جلب مواقيت الصلاة.";
     }
-}
 
-// تحديث شبكة مواقيت الصلاة
-function updatePrayerGrid(timings) {
-    const prayerGrid = document.getElementById("prayer-grid");
-    prayerGrid.innerHTML = "";
+    async getCurrentLocation() {
+        return new Promise((resolve, reject) => {
+            if (!navigator.geolocation) {
+                reject(new Error('Geolocation is not supported'));
+                return;
+            }
 
-    Object.entries(prayers).forEach(([key, name]) => {
-        const time = timings[key];
-        const box = document.createElement("div");
-        box.className = "prayer-box";
-        box.innerHTML = `
-            <h3>${name}</h3>
-            <p>${time}</p>
-        `;
-        prayerGrid.appendChild(box);
-    });
-}
+            navigator.geolocation.getCurrentPosition(
+                position => resolve({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                }),
+                error => reject(error)
+            );
+        });
+    }
 
-// بدء العد التنازلي للصلاة التالية
-function startCountdown(timings) {
-    function getNextPrayer() {
+    async fetchPrayerTimes() {
+        try {
+            const location = await this.getCurrentLocation();
+            const response = await fetch(
+                `${CONFIG.API_ENDPOINT}?latitude=${location.latitude}&longitude=${location.longitude}&method=3`
+            );
+            const data = await response.json();
+
+            if (!data.data || !data.data.timings) {
+                throw new Error('Invalid prayer times data');
+            }
+
+            this.prayerTimes = data.data.timings;
+            this.updateNextPrayer();
+        } catch (error) {
+            throw new Error('Failed to fetch prayer times: ' + error.message);
+        }
+    }
+
+    updateNextPrayer() {
         const now = new Date();
-        const prayerTimes = Object.entries(prayers).map(([key, arabicName]) => {
-            const [hours, minutes] = timings[key].split(":").map(Number);
-            const prayerTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
-            return { key, arabicName, time: prayerTime };
+        const todayPrayers = Object.entries(CONFIG.PRAYER_NAMES).map(([key, name]) => {
+            const [hours, minutes] = this.prayerTimes[key].split(':');
+            const prayerTime = new Date(now);
+            prayerTime.setHours(hours, minutes, 0);
+            return { key, name, time: prayerTime };
         });
 
-        return prayerTimes.find(prayer => prayer.time > now) || 
-               { ...prayerTimes[0], time: new Date(prayerTimes[0].time.getTime() + 24 * 60 * 60 * 1000) };
+        this.nextPrayer = todayPrayers.find(prayer => prayer.time > now) ||
+            { ...todayPrayers[0], time: new Date(todayPrayers[0].time.getTime() + 24 * 60 * 60 * 1000) };
     }
 
-    function updateDisplay() {
-        const nextPrayer = getNextPrayer();
-        updateCountdown(nextPrayer.time, nextPrayer.arabicName);
+    updateUI() {
+        this.updatePrayerGrid();
+        this.updateCountdown();
+        this.updatePrayerAlert();
     }
 
-    // تحديث كل ثانية
-    setInterval(updateDisplay, 1000);
-    updateDisplay(); // التحديث الأولي
-}
+    updatePrayerGrid() {
+        const prayerGrid = document.getElementById('prayer-grid');
+        if (!prayerGrid || !this.prayerTimes) return;
 
-// تحديث العداد للوقت المتبقي
-function updateCountdown(prayerTime, prayerName) {
-    const now = new Date();
-    const timeDifference = prayerTime - now;
+        prayerGrid.innerHTML = '';
+        Object.entries(CONFIG.PRAYER_NAMES).forEach(([key, name]) => {
+            const time = this.prayerTimes[key];
+            const isNext = this.nextPrayer && this.nextPrayer.key === key;
 
-    if (timeDifference > 0) {
-        const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-        document.getElementById("countdown").textContent =
-            `الوقت المتبقي حتى صلاة ${prayerName}: ${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-    } else {
-        document.getElementById("countdown").textContent = "حان وقت الصلاة!";
+            const box = document.createElement('div');
+            box.className = `prayer-box ${isNext ? 'next' : ''} fade-in`;
+            box.innerHTML = `
+                <h3>${name}</h3>
+                <p>${time}</p>
+                ${isNext ? '<div class="next-indicator">الصلاة القادمة</div>' : ''}
+            `;
+            prayerGrid.appendChild(box);
+        });
     }
-}
 
-// تهيئة الصفحة
-document.addEventListener("DOMContentLoaded", () => {
-    setInterval(updateDateTime, 1000); // تحديث الوقت كل ثانية
-    updateDateTime(); // التحديث الأولي للوقت
-    getLocationAndFetchPrayerTimes(); // جلب مواقيت الصلاة بناءً على الموقع
-    setInterval(getLocationAndFetchPrayerTimes, 24 * 60 * 60 * 1000); // تحديث مواقيت الصلاة يومياً
-});
+    updateCountdown() {
+        if (!this.nextPrayer) return;
 
+        const now = new Date();
+        const timeDiff = this.nextPrayer.time - now;
 
-document.addEventListener('DOMContentLoaded', function() {
-    const menuIcon = document.querySelector('.menu-icon');
-    const links = document.querySelector('.links');
-
-    menuIcon.addEventListener('click', function(event) {
-        links.classList.toggle('active');
-        event.stopPropagation(); // منع انتشار الحدث
-    });
-
-    // إغلاق القائمة عند النقر في أي مكان آخر
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('.links') && !event.target.closest('.menu-icon')) {
-            links.classList.remove('active');
+        if (timeDiff <= 0) {
+            this.updateNextPrayer();
+            return;
         }
-    });
+
+        const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+        const countdownElement = document.getElementById('countdown');
+        const nextPrayerElement = document.getElementById('next-prayer');
+
+        if (countdownElement && nextPrayerElement) {
+            nextPrayerElement.textContent = `الوقت المتبقي حتى صلاة ${this.nextPrayer.name}`;
+            countdownElement.textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+    }
+
+    updatePrayerAlert() {
+        const alertElement = document.getElementById('prayer-notification');
+        if (!alertElement || !this.nextPrayer) return;
+
+        alertElement.textContent = `الصلاة القادمة: ${this.nextPrayer.name} - ${formatTime(this.nextPrayer.time)}`;
+    }
+
+    startPeriodicUpdate() {
+        setInterval(() => this.updateCountdown(), 1000);
+        setInterval(() => this.fetchPrayerTimes(), CONFIG.PRAYER_UPDATE_INTERVAL);
+    }
+
+    handleError(error) {
+        const alertElement = document.getElementById('prayer-notification');
+        if (alertElement) {
+            alertElement.textContent = `عذراً، حدث خطأ: ${error.message}`;
+        }
+    }
+}
+
+// Announcements Management
+class AnnouncementManager {
+    constructor() {
+        this.announcements = [
+            { title: 'درس أسبوعي', content: 'درس في التفسير كل يوم خميس بعد صلاة المغرب' },
+            { title: 'حلقات تحفيظ جديدة', content: 'بدء التسجيل في حلقات تحفيظ القرآن الكريم للأطفال' },
+            { title: 'صيانة المسجد', content: 'أعمال صيانة وتنظيف المسجد يوم السبت القادم' }
+        ];
+        this.currentIndex = 0;
+    }
+
+    initialize() {
+        this.updateSlider();
+        setInterval(() => this.nextAnnouncement(), CONFIG.ANNOUNCEMENT_INTERVAL);
+    }
+
+    updateSlider() {
+        const slider = document.getElementById('announcement-slider');
+        if (!slider) return;
+
+        const announcement = this.announcements[this.currentIndex];
+        const slide = document.createElement('div');
+        slide.className = 'announcement-slide';
+        slide.innerHTML = `
+            <h3>${announcement.title}</h3>
+            <p>${announcement.content}</p>
+        `;
+
+        slider.innerHTML = '';
+        slider.appendChild(slide);
+        setTimeout(() => slide.classList.add('active'), 100);
+    }
+
+    nextAnnouncement() {
+        this.currentIndex = (this.currentIndex + 1) % this.announcements.length;
+        this.updateSlider();
+    }
+}
+
+// Mobile Menu Management
+class MobileMenuManager {
+    constructor() {
+        this.menuIcon = document.querySelector('.menu-icon');
+        this.navLinks = document.querySelector('.nav-links');
+        this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+        if (!this.menuIcon || !this.navLinks) return;
+
+        this.menuIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.navLinks.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-links') && !e.target.closest('.menu-icon')) {
+                this.navLinks.classList.remove('active');
+            }
+        });
+    }
+}
+
+// Initialize Everything
+document.addEventListener('DOMContentLoaded', () => {
+    // Update current date/time
+    const updateDateTime = () => {
+        const dateTimeElement = document.getElementById('current-datetime');
+        if (dateTimeElement) {
+            const now = new Date();
+            dateTimeElement.textContent = `${formatDate(now)} - ${formatTime(now)}`;
+        }
+    };
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+
+    // Initialize all managers
+    const prayerManager = new PrayerTimesManager();
+    const announcementManager = new AnnouncementManager();
+    const mobileMenuManager = new MobileMenuManager();
+
+    prayerManager.initialize();
+    announcementManager.initialize();
 });
