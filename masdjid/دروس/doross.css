@@ -1,0 +1,205 @@
+/* إعادة تعيين الأنماط الافتراضية وتعيين الخط */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* تعيين لون خلفية الصفحة */
+body {
+    background-color: #f5f5f5;
+}
+
+/* تنسيق الهيدر الرئيسي */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+    position: relative; /* للتحكم بموضع العناصر المطلقة داخله */
+}
+
+/* تنسيق العنوان في الهيدر */
+.header h1 {
+    margin-left: 10px;
+    color: black;
+}
+
+/* تنسيق حاوية شعار المسجد والعنوان */
+.hea {
+    display: flex;
+    align-items: center;
+}
+
+.hea h2 {
+    margin-right: 25px;
+    margin-top: -30px;
+}
+
+/* تنسيق قائمة الروابط */
+.links {
+    display: flex;
+    gap: 20px;
+}
+
+/* تنسيق الروابط الفردية */
+.link {
+    text-decoration: none;
+    color: #555;
+    font-size: 18px;
+    font-family: arial, sans-serif;
+    transition: color 0.3s ease;
+    padding-right: 10px;
+    padding-top: 3px;
+}
+
+.link:hover {
+    color: #000;
+}
+
+/* تنسيقات القائمة المنسدلة */
+.menu-container {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.menu-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* تنسيق القائمة المنسدلة في وضع الموبايل */
+.links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    width: 200px;
+    background-color: #fff;
+    flex-direction: column;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+    border-radius: 4px;
+}
+
+.links.active {
+    display: flex;
+}
+
+
+/* تنسيق التذييل */
+.footer {
+    background-color: #004d40;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+/* تنسيق معلومات الاتصال */
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* تنسيقات القائمة المنسدلة */
+.menu-container {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.menu-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* تنسيق القائمة المنسدلة في وضع الموبايل */
+.links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    width: 200px;
+    background-color: #fff;
+    flex-direction: column;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+    border-radius: 4px;
+}
+
+.links.active {
+    display: flex;
+}
+
+/* التجاوب مع الشاشات المختلفة */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2.5rem;
+    }
+
+    .header p {
+        font-size: 1.2rem;
+    }
+
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* تنسيقات الشاشات الكبيرة */
+@media screen and (min-width: 769px) {
+    .menu-icon {
+        display: none;
+    }
+
+    .links {
+        display: flex;
+        position: static;
+        width: auto;
+        flex-direction: row;
+        box-shadow: none;
+        margin-right: 20px;
+    }
+
+    .link {
+        border: none;
+        padding: 10px 15px;
+    }
+}
+
+/* تنسيق عناوين المسموعات */
+.audio-titles {
+    padding: 20px;
+}
+
+.audio-title {
+    cursor: pointer;
+    color: #4CAF50;
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+.audio-title:hover {
+    text-decoration: underline;
+}
+
+/* تنسيق قائمة الأوديو */
+.audio-list {
+    width: 9cm;
+    margin: 0 auto;
+    padding: 3px;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 40px;
+}
+
