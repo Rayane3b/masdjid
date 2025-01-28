@@ -53,6 +53,7 @@ const scheduleData = {
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuManager = new MobileMenuManager();
     initializeMobileMenu();
     populateScheduleTable();
     initializeRegistrationForm();
@@ -72,6 +73,44 @@ function initializeSmoothScroll() {
             block: 'start'
         });
     });
+}
+
+class MobileMenuManager {
+    constructor() {
+        this.menuIcon = document.querySelector('.menu-icon');
+        this.navLinks = document.querySelector('.nav-links');
+        this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+        if (!this.menuIcon || !this.navLinks) return;
+
+        this.menuIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.navLinks.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-links') && !e.target.closest('.menu-icon')) {
+                this.navLinks.classList.remove('active');
+            }
+        });
+
+        // Update active links on page load
+        this.updateActiveLinks();
+    }
+
+    updateActiveLinks() {
+        const currentPath = window.location.pathname;
+        const links = document.querySelectorAll('.nav-link');
+        
+        links.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(currentPath.split('/').pop())) {
+                link.classList.add('active');
+            }
+        });
+    }
 }
 
 // Mobile Menu

@@ -230,6 +230,38 @@ class MobileMenuManager {
             }
         });
     }
+    updateActiveLinks() {
+        const currentPath = window.location.pathname;
+        const links = document.querySelectorAll('.nav-link');
+        
+        links.forEach(link => {
+            // Remove active class from all links
+            link.classList.remove('active');
+            
+            // Add active class if the href matches current path
+            if (link.getAttribute('href').includes(currentPath.split('/').pop())) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    setupEventListeners() {
+        if (!this.menuIcon || !this.navLinks) return;
+
+        this.menuIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.navLinks.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-links') && !e.target.closest('.menu-icon')) {
+                this.navLinks.classList.remove('active');
+            }
+        });
+
+        // Update active links on page load
+        this.updateActiveLinks();
+    }
 }
 
 // Initialize Everything
