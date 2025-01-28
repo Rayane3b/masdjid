@@ -394,23 +394,6 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.social-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.social-links a {
-    color: var(--white);
-    font-size: 1.5rem;
-    transition: var(--transition);
-}
-
-.social-links a:hover {
-    color: var(--primary-light);
-    transform: translateY(-2px);
-}
-
 .scroll-top-btn {
     position: fixed;
     bottom: 20px;
