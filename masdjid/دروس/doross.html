@@ -3,162 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دروس</title>    
+    <title>دروس مسجد أبو بكر الصديق</title>
     <link rel="stylesheet" href="doross.css">
-    <link rel="icon" href="../صور/video-lesson.png" type="image/png">
+    <link rel="icon" href="../صور/masjid-logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header class="header">
-        <div class="header-top">
-            <div class="prayer-alert" id="prayer-alert">
-                <i class="fas fa-bell"></i>
-                <span id="prayer-notification">جاري تحميل مواقيت الصلاة...</span>
-            </div>
-        </div>
-        
         <div class="header-main">
             <div class="mosque-title">
-                <i class="fas fa-mosque"></i>
-                <h1>مسجد أبو بكر الصديق</h1>
-                <div class="subtitle" id="plato">بلاطو - عين طاية</div>
+                <img src="../صور/masjid-logo.png" alt="شعار المسجد" class="mosque-logo">
+                <h1>دروس مسجد أبو بكر الصديق</h1>
             </div>
             
-            <div class="menu-container">
-                <button class="menu-icon">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+            <button class="menu-icon">
+                <i class="fas fa-bars"></i>
+            </button>
 
             <nav class="nav-links">
-                <a href="../الرئيسية/masdjid.html" class="nav-link active">
+                <a href="../الرئيسة/masdjid.html" class="nav-link">
                     <i class="fas fa-home"></i>
                     <span>الرئيسية</span>
                 </a>
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link active">
                     <i class="fas fa-book-open"></i>
                     <span>دروس</span>
                 </a>
-                <a href="../فتاوى/fatwa.html" class="nav-link">
+                <a href="#" class="nav-link">
                     <i class="fas fa-scroll"></i>
                     <span>فتاوى</span>
                 </a>
                 <a href="../مكتبة/maktaba.html" class="nav-link">
-                    <i class="fa-solid fa-book"></i>
+                    <i class="fas fa-books"></i>
                     <span>مكتبة</span>
                 </a>
-                <a href="../حلقات/halaqat.html" class="nav-link">
+                <a href="#" class="nav-link">
                     <i class="fas fa-users"></i>
                     <span>حلقات</span>
                 </a>
             </nav>
         </div>
     </header>
-    <!--الدروس والمسموعات-->
-    <div class="audio-titles">
-    <h3 class="audio-title" onclick="toggleAudioList('audio1')">عنوان المسموعة 1</h3>
-    <div id="audio1" class="audio-list" style="display: none;">
-        <audio controls>
-            <source src="audio1.mp3" type="audio/mpeg">
-            متصفحك لا يدعم عنصر الأوديو.
-        </audio>
-    </div>
 
-    <h3 class="audio-title" onclick="toggleAudioList('audio2')">عنوان المسموعة 2</h3>
-    <div id="audio2" class="audio-list" style="display: none;">
-        <audio controls>
-            <source src="audio2.mp3" type="audio/mpeg">
-            متصفحك لا يدعم عنصر الأوديو.
-        </audio>
-    </div>
-    <h3 class="audio-title" onclick="toggleAudioList('audio3')">عنوان المسموعة 3</h3>
-    <div id="audio3" class="audio-list" style="display: none;">
-        <audio controls>
-            <source src="audio3.mp3" type="audio/mpeg">
-            متصفحك لا يدعم عنصر الأوديو.
-        </audio>
-    </div>
-    <h3 class="audio-title" onclick="toggleAudioList('audio4')">عنوان المسموعة 4</h3>
-    <div id="audio4" class="audio-list" style="display: none;">
-        <audio controls>
-            <source src="audio4.mp3" type="audio/mpeg">
-            متصفحك لا يدعم عنصر الأوديو.
-        </audio>
-    </div>
-    <h3 class="audio-title" onclick="toggleAudioList('audio5')">عنوان المسموعة 5</h3>
-    <div id="audio5" class="audio-list" style="display: none;">
-        <audio controls>
-            <source src="audio5.mp3" type="audio/mpeg">
-            متصفحك لا يدعم عنصر الأوديو.
-        </audio>
-    </div>
-    <h3 class="audio-title" onclick="toggleAudioList('audio6')">عنوان المسموعة 6</h3>
-    <div id="audio6" class="audio-list" style="display: none;">
-        <audio controls>
-            <source src="audio6.mp3" type="audio/mpeg">
-            متصفحك لا يدعم عنصر الأوديو.
-        </audio>
-    </div>
-    <h3 class="audio-title" onclick="toggleAudioList('audio7')">عنوان المسموعة 7</h3>
-    <div id="audio7" class="audio-list" style="display: none;">
-        <audio controls>
-            <source src="audio7.mp3" type="audio/mpeg">
-            متصفحك لا يدعم عنصر الأوديو.
-        </audio>
-    </div>
-    <h3 class="audio-title" onclick="toggleAudioList('audio8')">عنوان المسموعة 8</h3>
-    <div id="audio8" class="audio-list" style="display: none;">
-        <audio controls>
-            <source src="audio8.mp3" type="audio/mpeg">
-            متصفحك لا يدعم عنصر الأوديو.
-        </audio>
-    </div>
-    <h3 class="audio-title" onclick="toggleAudioList('audio9')">عنوان المسموعة 9</h3>
-    <div id="audio9" class="audio-list" style="display: none;">
-        <audio controls>
-            <source src="audio9.mp3" type="audio/mpeg">
-            متصفحك لا يدعم عنصر الأوديو.
-        </audio>
-    </div>
-    <h3 class="audio-title" onclick="toggleAudioList('audio10')">عنوان المسموعة 10</h3>
-    <div id="audio10" class="audio-list" style="display: none;">
-        <audio controls>
-            <source src="audio10.mp3" type="audio/mpeg">
-            متصفحك لا يدعم عنصر الأوديو.
-        </audio>
-    </div>
-</div>
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-section">
-            <h3>تواصل معنا</h3>
-            <div class="contact-info">
-                <p><i class="fas fa-phone"></i> 0795569675</p>
-                <p><i class="fas fa-envelope"></i> rayanebenfattoum21@gmail.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> بلاطو، عين طاية</p>
+    <main class="main-content">
+        <section class="lessons-section">
+            <h2 class="section-title">الدروس المسجلة</h2>
+            
+            <div class="lessons-grid">
+                <div class="lesson-category">
+                    <h3 class="category-title" data-category="tafseer">
+                        <i class="fas fa-book-quran"></i>
+                        التفسير
+                        <i class="fas fa-chevron-down"></i>
+                    </h3>
+                    <div class="lesson-list" id="tafseer-lessons">
+                        <div class="lesson-item">
+                            <div class="lesson-info">
+                                <h4>تفسير سورة البقرة - الدرس الأول</h4>
+                                <p>الشيخ مقداد م. - 12/01/2024</p>
+                            </div>
+                            <audio controls class="lesson-audio">
+                                <source src="path/to/audio1.mp3" type="audio/mpeg">
+                                متصفحك لا يدعم تشغيل الملفات الصوتية
+                            </audio>
+                        </div>
+                        <!-- More lessons... -->
+                    </div>
+                </div>
+
+                <div class="lesson-category">
+                    <h3 class="category-title" data-category="hadith">
+                        <i class="fas fa-book"></i>
+                        الحديث
+                        <i class="fas fa-chevron-down"></i>
+                    </h3>
+                    <div class="lesson-list" id="hadith-lessons">
+                        <!-- Lesson items -->
+                    </div>
+                </div>
+
+                <div class="lesson-category">
+                    <h3 class="category-title" data-category="fiqh">
+                        <i class="fas fa-balance-scale"></i>
+                        الفقه
+                        <i class="fas fa-chevron-down"></i>
+                    </h3>
+                    <div class="lesson-list" id="fiqh-lessons">
+                        <!-- Lesson items -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" id="lesson-search" placeholder="ابحث عن درس...">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> 0795569675</p>
+                    <p><i class="fas fa-envelope"></i> rayanebenfattoum21@gmail.com</p>
+                </div>
             </div>
         </div>
         
-        <div class="footer-section">
-            <h3>روابط سريعة</h3>
-            <ul class="quick-links">
-                <li><a href="#">جدول الدروس</a></li>
-                <li><a href="#">التسجيل في حلقات التحفيظ</a></li>
-                <li><a href="#">المكتبة الإلكترونية</a></li>
-            </ul>
+        <div class="footer-bottom">
+            <p>جميع الحقوق محفوظة © 2024 مسجد أبو بكر الصديق</p>
         </div>
-        
-        <div class="footer-section">
-            <h3>ساعات العمل</h3>
-            <p>المسجد مفتوح على مدار الساعة</p>
-            <p>المكتبة: 9:00 صباحاً - 9:00 مساءً</p>
-        </div>
-    </div>
-    
-    <div class="footer-bottom">
-        <p>جميع الحقوق محفوظة © 2024 مسجد أبو بكر الصديق</p>
-    </div>
-</footer>
-        <script src="doross.js"></script>
+    </footer>
+
+    <script src="doross.js"></script>
 </body>
 </html>

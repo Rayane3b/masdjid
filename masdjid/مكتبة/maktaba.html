@@ -3,147 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دروس</title>    
+    <title>مكتبة مسجد أبو بكر الصديق</title>
     <link rel="stylesheet" href="maktaba.css">
-    <link rel="icon" href="../صور/books-stack-of-three.png" type="image/png">
+    <link rel="icon" href="../صور/masjid-logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
- <body>
-  <header class="header">
-    <div class="header-top">
-        <div class="prayer-alert" id="prayer-alert">
-            <i class="fas fa-bell"></i>
-            <span id="prayer-notification">جاري تحميل مواقيت الصلاة...</span>
-        </div>
-    </div>
-    
-    <div class="header-main">
-        <div class="mosque-title">
-            <i class="fas fa-mosque"></i>
-            <h1>مسجد أبو بكر الصديق</h1>
-            <div class="subtitle" id="plato">بلاطو - عين طاية</div>
-        </div>
-        
-        <div class="menu-container">
+<body>
+    <header class="header">
+        <div class="header-main">
+            <div class="mosque-title">
+                <img src="../صور/masjid-logo.png" alt="شعار المسجد" class="mosque-logo">
+                <h1>مكتبة مسجد أبو بكر الصديق</h1>
+            </div>
+            
             <button class="menu-icon">
                 <i class="fas fa-bars"></i>
             </button>
-        </div>
 
-        <nav class="nav-links">
-            <a href="../الرئيسية/masdjid.html" class="nav-link active">
-                <i class="fas fa-home"></i>
-                <span>الرئيسية</span>
+            <nav class="nav-links">
+                <a href="../الرئيسة/masdjid.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>الرئيسية</span>
+                </a>
+                <a href="../دروس/doross.html" class="nav-link">
+                    <i class="fas fa-book-open"></i>
+                    <span>دروس</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-scroll"></i>
+                    <span>فتاوى</span>
+                </a>
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-books"></i>
+                    <span>مكتبة</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    <span>حلقات</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <nav class="library-menu">
+            <a href="#" class="menu-item">
+                <i class="fas fa-book"></i>
+                <span>كتاب الأمة</span>
             </a>
-            <a href="../دروس/doross.html" class="nav-link">
-                <i class="fas fa-book-open"></i>
-                <span>دروس</span>
+            <a href="#" class="menu-item">
+                <i class="fas fa-info-circle"></i>
+                <span>حول المكتبة</span>
             </a>
-            <a href="../فتاوى/fatwa.html" class="nav-link">
-                <i class="fas fa-scroll"></i>
-                <span>فتاوى</span>
+            <a href="#" class="menu-item">
+                <i class="fas fa-list"></i>
+                <span>قائمة الكتب</span>
             </a>
-            <a href="#" class="nav-link">
-              <i class="fa-solid fa-book"></i>
-                 <span>مكتبة</span>
+            <a href="#" class="menu-item">
+                <i class="fas fa-th"></i>
+                <span>عرض موضوعي</span>
             </a>
-            <a href="../حلقات/halaqat.html" class="nav-link">
+            <a href="#" class="menu-item">
                 <i class="fas fa-users"></i>
-                <span>حلقات</span>
+                <span>تراجم الأعلام</span>
             </a>
         </nav>
-    </div>
-</header>
-    <nav class="menu">
-        <a href=""><img src="" alt="">
-        كتاب الأمة</a>
-        
-        <a href=""><img src="" alt=""> 
-        حول المكتبة</a>
-        
-        <a href=""><img src="" alt="">
-        قائمة الكتب</a>
-        
-        <a href=""><img src="" alt="">
-        عرض موضوعي</a>
-        
-        <a href=""><img src="" alt=""> 
-        تراجم الأعلام</a>
-    </nav>	
-    <div class="list">
-      <h3>
-        <span>العرض الموضوعي</span>
-      </h3>
-      <ul>
-        <li>
-          <label class="tree_label">العبادات</label>
-        </li>
-        <li>
-          <label class="tree_label">المعاملات</label>
-        </li>
-        <li>
-          <label class="tree_label">العادات</label>
-        </li>
-        <li>
-          <label class="tree_label">الآداب الشرعية</label>
-        </li>
-        <li>
-          <label class="tree_label">أصول الفقه</label>
-        </li>
-        <li>
-          <label class="tree_label">المنطق</label>
-        </li>
-        <li>
-          <label class="tree_label">العقيدة</label>
-        </li>
-        <li>
-          <label class="tree_label">التفسير وعلوم القرآن</label>
-        </li>
-        <li>
-          <label class="tree_label">مصطلح الحديث</label>
-        </li>
-        <li>
-          <label class="tree_label">السيرة</label>
-        </li>
-        <li>
-          <label class="tree_label">التصوف والصوفية</label>
-        </li>
-        <li>
-          <label class="tree_label">التاريخ والأمم السابقة</label>
-        </li>
-      </ul>
-    </div>
-    <footer class="footer">
-      <div class="footer-content">
-          <div class="footer-section">
-              <h3>تواصل معنا</h3>
-              <div class="contact-info">
-                  <p><i class="fas fa-phone"></i> 0795569675</p>
-                  <p><i class="fas fa-envelope"></i> rayanebenfattoum21@gmail.com</p>
-                  <p><i class="fas fa-map-marker-alt"></i> بلاطو، عين طاية</p>
+
+        <section class="topics-section">
+          <h2 class="section-title">العرض الموضوعي</h2>
+          <div class="topics-grid">
+              <div class="topic-card">
+                  <i class="fas fa-pray"></i>
+                  <h3>العبادات</h3>
+              </div>
+              <div class="topic-card">
+                  <i class="fas fa-handshake"></i>
+                  <h3>المعاملات</h3>
+              </div>
+              <div class="topic-card">
+                  <i class="fas fa-heart"></i>
+                  <h3>العادات</h3>
+              </div>
+              <div class="topic-card">
+                  <i class="fas fa-star-and-crescent"></i>
+                  <h3>الآداب الشرعية</h3>
+              </div>
+              <div class="topic-card">
+                  <i class="fas fa-book-reader"></i>
+                  <h3>أصول الفقه</h3>
+              </div>
+              <div class="topic-card">
+                  <i class="fas fa-brain"></i>
+                  <h3>المنطق</h3>
+              </div>
+              <div class="topic-card">
+                  <i class="fas fa-kaaba"></i>
+                  <h3>العقيدة</h3>
+              </div>
+              <div class="topic-card">
+                  <i class="fas fa-quran"></i>
+                  <h3>التفسير وعلوم القرآن</h3>
+              </div>
+              <div class="topic-card">
+                  <i class="fas fa-scroll"></i>
+                  <h3>مصطلح الحديث</h3>
+              </div>
+              <div class="topic-card">
+                  <i class="fas fa-moon"></i>
+                  <h3>السيرة</h3>
+              </div>
+              <div class="topic-card">
+                  <i class="fas fa-om"></i>
+                  <h3>التصوف والصوفية</h3>
+              </div>
+              <div class="topic-card">
+                  <i class="fas fa-atlas"></i>
+                  <h3>التاريخ والأمم السابقة</h3>
               </div>
           </div>
-          
-          <div class="footer-section">
-              <h3>روابط سريعة</h3>
-              <ul class="quick-links">
-                  <li><a href="#">جدول الدروس</a></li>
-                  <li><a href="#">التسجيل في حلقات التحفيظ</a></li>
-                  <li><a href="#">المكتبة الإلكترونية</a></li>
-              </ul>
-          </div>
-          
-          <div class="footer-section">
-              <h3>ساعات العمل</h3>
-              <p>المسجد مفتوح على مدار الساعة</p>
-              <p>المكتبة: 9:00 صباحاً - 9:00 مساءً</p>
-          </div>
-      </div>
-      
-      <div class="footer-bottom">
-          <p>جميع الحقوق محفوظة © 2024 مسجد أبو بكر الصديق</p>
-      </div>
-  </footer>
-            <script src="maktaba.js"></script>
-  </body>
+      </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> 0795569675</p>
+                    <p><i class="fas fa-envelope"></i> rayanebenfattoum21@gmail.com</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>جميع الحقوق محفوظة © 2024 مسجد أبو بكر الصديق</p>
+        </div>
+    </footer>
+
+    <script src="maktaba.js"></script>
+</body>
 </html>
