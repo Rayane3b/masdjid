@@ -1,4 +1,21 @@
-/* إعادة تعيين الأنماط الافتراضية وتعيين الخط */
+:root {
+    --primary-color: #00897B;    /* Turquoise */
+    --secondary-color: #26A69A;  /* Light Turquoise */
+    --accent-color: #004D40;     /* Dark Turquoise */
+    --light-turquoise: #B2DFDB;  /* Very Light Turquoise */
+    --gold: #D4AF37;             /* Islamic Gold accent */
+    --cream: #FFF8E1;    
+    --white: #ffffff;
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --text-primary: #333333;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    --border-radius: 8px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,113 +23,236 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-/* تعيين لون خلفية الصفحة */
 body {
-    background-color: #f5f5f5;
+    background-color: var(--gray-100);
+    color: var(--text-primary);
+    line-height: 1.6;
 }
 
-/* تنسيق الهيدر الرئيسي */
+/* Header Styles */
 .header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+
+
+
+
+.header-top {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 8px 20px;
+    text-align: center;
+}
+
+.prayer-alert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.header-main {
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
-    background-color: #f4f4f4;
-    position: relative; /* للتحكم بموضع العناصر المطلقة داخله */
 }
 
-/* تنسيق العنوان في الهيدر */
-.header h1 {
-    margin-left: 10px;
-    color: black;
-}
-
-/* تنسيق حاوية شعار المسجد والعنوان */
-.hea {
+.mosque-title {
     display: flex;
     align-items: center;
+    gap: 15px;
 }
 
-.hea h2 {
-    margin-right: 25px;
-    margin-top: -30px;
+.mosque-title i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
 }
 
-/* تنسيقات القائمة المنسدلة */
-.menu-container {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+.mosque-title h1 {
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    color: var(--cream);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-.menu-icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 10px;
+.subtitle {
+    color: var(--secondary-color);
+    font-size: 1rem;
 }
 
-/* تنسيق قائمة الروابط */
-.links {
+#plato {
+    color: whitesmoke ;
+}
+
+/* Navigation Styles */
+.nav-links {
     display: flex;
     gap: 20px;
 }
 
-/* تنسيق الروابط الفردية */
-.link {
-    text-decoration: none;
-    color: #555;
-    font-size: 18px;
-    font-family: arial, sans-serif;
-    transition: color 0.3s ease;
-    padding-right: 10px;
-    padding-top: 3px;
-}
-
-.link:hover {
-    color: #000;
-}
-
-/* تنسيق القائمة المنسدلة في وضع الموبايل */
-.links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 20px;
-    width: 200px;
-    background-color: #fff;
-    flex-direction: column;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    z-index: 1000;
-    border-radius: 4px;
-}
-
-.links.active {
+.nav-link {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
-}
-
-/* قائمة جانبية */
-.menu {
-    display: none;
-    flex-direction: column;
-    background-color: #f0f0f0;
-    padding: 10px;
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.menu a {
+    align-items: center;
+    gap: 8px;
     text-decoration: none;
-    color: #333;
-    padding: 10px;
-    display: block;
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
 }
 
-.menu a:hover {
-    background-color: #ddd;
-    color: #007bff;
+
+.nav-link:hover {
+    background-color: var(--light-green);
+    color: var(--primary-color);
+}
+
+.nav-link.active {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 60px 20px 20px;
+    margin-top: 60px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.footer-section h3 {
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quick-links {
+    list-style: none;
+}
+
+.quick-links li {
+    margin-bottom: 10px;
+}
+
+.quick-links a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.quick-links a:hover {
+    color: var(--light-green);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design (continued) */
+@media (max-width: 768px) {
+    .nav-link {
+        justify-content: center;
+    }
+
+    .mosque-title {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .prayer-times-card {
+        padding: 20px;
+    }
+
+    .countdown {
+        font-size: 2rem;
+    }
+
+    .feature-card {
+        padding: 20px;
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Mobile Menu */
+.menu-icon {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--white);
+        padding: 20px;
+        box-shadow: var(--shadow-md);
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
 }
 
 /* قائمة المواضيع */
@@ -148,55 +288,4 @@ body {
 .list li:hover {
     background-color: #f0f0f0;
     border-color: #007bff;
-}
-
-footer {
-    background-color: #004d40;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-footer h2 {
-    margin-bottom: 10px;
-}
-
-footer .contact-info p {
-    margin: 5px 0;
-}
-
-/* التجاوب مع الشاشات المختلفة */
-@media (max-width: 768px) {
-    .header h1 {
-        font-size: 2.5rem;
-    }
-
-    .header p {
-        font-size: 1.2rem;
-    }
-
-    .main-content {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* تنسيقات الشاشات الكبيرة */
-@media screen and (min-width: 769px) {
-    .menu-icon {
-        display: none;
-    }
-
-    .links {
-        display: flex;
-        position: static;
-        width: auto;
-        flex-direction: row;
-        box-shadow: none;
-        margin-right: 20px;
-    }
-
-    .link {
-        border: none;
-        padding: 10px 15px;
-    }
 }
